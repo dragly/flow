@@ -35,8 +35,8 @@ function stringifyProperties(object, properties, isLevel) {
                     propertyValue += "width * ";
                 } else {
                     if(relativeOrder === 2) {
-                        realValue /= Math.sqrt(object.level["width"]);
-                        propertyValue += "Math.sqrt(level.width) * ";
+                        realValue /= (object.level["width"]*object.level["width"]);
+                        propertyValue += "level.width * level.width * ";
                     } else {
                         realValue /=  object.level["width"];
                         propertyValue += "level.width * ";

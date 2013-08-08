@@ -13,7 +13,7 @@ FlowEntity {
     height: width
 
     function stringify() {
-        var properties = ["!flowTargetX", "!flowTargetY", "emitRate", "|magnitude"];
+        var properties = ["!flowTargetX", "!flowTargetY", "emitRate", "!magnitude"];
         var data = "";
         data += "    FlowSource {\n";
         data += stringifyDefaults();

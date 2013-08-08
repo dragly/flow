@@ -23,7 +23,7 @@ Item {
     }
 
     function save() {
-        var properties = ["|frictionTreshold", "originalWidth", "originalHeight"];
+        var properties = ["!frictionTreshold", "originalWidth", "originalHeight"];
         var data = "";
         data += "import QtQuick 2.0\n" +
                 "import \"..\"\n" +

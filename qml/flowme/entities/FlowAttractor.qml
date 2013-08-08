@@ -12,7 +12,7 @@ FlowEntity {
     height: width
 
     function stringify() {
-        var properties = ["!strength"];
+        var properties = ["|strength"];
         var data = "";
         data += "    FlowAttractor {\n";
         data += stringifyDefaults();
