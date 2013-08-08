@@ -11,8 +11,20 @@ Item {
     property LevelBase level: parent
     property bool draggable: false
     property bool _trulyDraggable: draggable || level.editMode
-    width: 100
-    height: 62
+
+    function stringify() {
+        return "/* This entity has no save method! */\n"
+    }
+
+    function stringifyDefaults() {
+        var properties = ["!x", "!y", "draggable"];
+        var data = Stringifier.stringifyProperties(entityRoot, properties, false);
+        return data;
+    }
+
+    width: level.width * 0.05
+    height: width
+
     MouseArea {
         z: 100
 
@@ -38,15 +50,5 @@ Item {
             top: parent.top
         }
         color: "red"
-    }
-
-    function stringify() {
-        return "/* This entity has no save method! */\n"
-    }
-
-    function stringifyDefaults() {
-        var properties = ["draggable"];
-        var data = Stringifier.stringifyProperties(entityRoot, properties, 2);
-        return data;
     }
 }

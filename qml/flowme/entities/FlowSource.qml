@@ -7,15 +7,17 @@ FlowEntity {
     id: flowSourceRoot
     property alias flowTargetX: flowTarget.x
     property alias flowTargetY: flowTarget.y
-    width: 50
-    height: 50
+    property alias emitRate: emitter.emitRate
+    property alias magnitude: emitDirection.magnitude
+    width: level.width * 0.05
+    height: width
 
     function stringify() {
-        var properties = ["x", "y", "flowTargetX", "flowTargetY"];
+        var properties = ["!flowTargetX", "!flowTargetY", "emitRate", "|magnitude"];
         var data = "";
         data += "    FlowSource {\n";
         data += stringifyDefaults();
-        data += Stringifier.stringifyProperties(flowSourceRoot, properties, 2);
+        data += Stringifier.stringifyProperties(flowSourceRoot, properties, false);
         data += "    }\n";
         return data;
     }
@@ -52,10 +54,12 @@ FlowEntity {
         id: emitter
         system: parent.system
         anchors.centerIn: parent
-        lifeSpan: 8000
+        lifeSpan: 12000
+        lifeSpanVariation: 5000
         emitRate: 30
-        size: 20
-        endSize: 5
+        size: level.width * 0.02
+        sizeVariation: size / 10
+        endSize: level.width * 0.01
         velocity: TargetDirection {
             id: emitDirection
             //            angleVariation: 180

@@ -9,14 +9,27 @@ Item {
     property int frictionTreshold: 150
     property bool editMode: false
     property ParticleSystem system: particleSystem
+    property int originalWidth: width
+    property int originalHeight: height
+
     width: 100
     height: 62
     focus: true
 
+    anchors {
+        onTopMarginChanged: {
+            console.log(anchors.topMargin)
+        }
+    }
+
     function save() {
-        var properties = ["frictionTreshold"];
-        var data = "LevelBase {\n";
-        data += Stringifier.stringifyProperties(levelRoot, properties, 1);
+        var properties = ["|frictionTreshold", "originalWidth", "originalHeight"];
+        var data = "";
+        data += "import QtQuick 2.0\n" +
+                "import \"..\"\n" +
+                "import \"../entities\"\n"+
+                "LevelBase {\n";
+        data += Stringifier.stringifyProperties(levelRoot, properties, true);
         for(var i in children) {
             var child = children[i];
             if(child.isEntity === true) {
@@ -55,15 +68,15 @@ Item {
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton | Qt.RightButton
         onClicked: {
-            if(mouse.button === Qt.LeftButton) {
-                var componentSource = "entities/" + editorMenu.source
-                var component = Qt.createComponent(componentSource)
-                var properties = {system: levelRoot.system, level: levelRoot}
-                var object = component.createObject(levelRoot, properties)
-                object.x = mouse.x - object.width / 2
-                object.y = mouse.y - object.height / 2
-            } else if(mouse.button === Qt.RightButton) {
-                if(editMode) {
+            if(editMode) {
+                if(mouse.button === Qt.LeftButton) {
+                    var componentSource = "entities/" + editorMenu.source
+                    var component = Qt.createComponent(componentSource)
+                    var properties = {system: levelRoot.system, level: levelRoot}
+                    var object = component.createObject(levelRoot, properties)
+                    object.x = mouse.x - object.width / 2
+                    object.y = mouse.y - object.height / 2
+                } else if(mouse.button === Qt.RightButton) {
                     var object = levelRoot.childAt(mouse.x, mouse.y);
                     if(object.isEntity === true) {
                         object.destroy();

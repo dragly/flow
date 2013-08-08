@@ -8,15 +8,15 @@ FlowEntity {
 
     property int strength: 2e6
 
-    width: 50
-    height: 50
+    width: level.width * 0.05
+    height: width
 
     function stringify() {
-        var properties = ["x", "y", "strength"];
+        var properties = ["!strength"];
         var data = "";
         data += "    FlowAttractor {\n";
         data += stringifyDefaults();
-        data += Stringifier.stringifyProperties(flowAttractorRoot, properties, 2);
+        data += Stringifier.stringifyProperties(flowAttractorRoot, properties, false);
         data += "    }\n";
         return data;
     }

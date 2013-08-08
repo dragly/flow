@@ -19,8 +19,22 @@ Rectangle {
     color: "black"
     Loader {
         id: levelLoader
-        anchors.fill: parent
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+        }
+
         focus: true
         source: "levels/TestLevel.qml"
+    }
+
+    Keys.onPressed: {
+        if(event.key === Qt.Key_R && event.modifiers & Qt.ControlModifier) {
+            var prevLevel = levelLoader.source
+            levelLoader.source = ""
+            levelLoader.source = prevLevel
+        }
     }
 }
