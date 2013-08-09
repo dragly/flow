@@ -6,7 +6,8 @@ import "stringifier.js" as Stringifier
 Item {
     id: levelRoot
     property int score: 0
-    property int frictionTreshold: 150
+    property real frictionTreshold: 150
+    property real frictionFactor: 1000
     property bool editMode: false
     property ParticleSystem system: particleSystem
     property int originalWidth: width
@@ -23,7 +24,7 @@ Item {
     }
 
     function save() {
-        var properties = ["!frictionTreshold", "originalWidth", "originalHeight"];
+        var properties = ["frictionTreshold","frictionFactor", "originalWidth", "originalHeight"];
         var data = "";
         data += "import QtQuick 2.0\n" +
                 "import \"..\"\n" +
@@ -60,8 +61,8 @@ Item {
     Friction {
         id: friction
         system: particleSystem
-        factor: 1e18
-        threshold: levelRoot.frictionTreshold
+        factor: levelRoot.frictionFactor * levelRoot.width
+        threshold: levelRoot.frictionTreshold * levelRoot.width
     }
 
     MouseArea {

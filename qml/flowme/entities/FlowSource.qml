@@ -5,15 +5,15 @@ import "../stringifier.js" as Stringifier
 
 FlowEntity {
     id: flowSourceRoot
-    property alias flowTargetX: flowTarget.x
-    property alias flowTargetY: flowTarget.y
+    property real flowTargetX: 0
+    property real flowTargetY: 0
     property alias emitRate: emitter.emitRate
     property alias magnitude: emitDirection.magnitude
     width: level.width * 0.05
     height: width
 
     function stringify() {
-        var properties = ["!flowTargetX", "!flowTargetY", "emitRate", "!magnitude"];
+        var properties = ["!flowTargetX", "!flowTargetY", "emitRate", "magnitude"];
         var data = "";
         data += "    FlowSource {\n";
         data += stringifyDefaults();
@@ -29,7 +29,7 @@ FlowEntity {
 
         Rectangle {
             visible: level.editMode
-            property real ratio: Math.abs(emitDirection.magnitude) / 1000
+            property real ratio: Math.abs(emitDirection.magnitude) / 10
             anchors.centerIn: parent
             anchors.horizontalCenterOffset: -parent.width / 3
             width: ratio * parent.width
@@ -64,8 +64,8 @@ FlowEntity {
             id: emitDirection
             //            angleVariation: 180
             targetItem: flowTarget
-    //                proportionalMagnitude: true
-            magnitude: 250
+            proportionalMagnitude: true
+            magnitude: 10
             magnitudeVariation: 0
             targetVariation: 20
         }
@@ -75,8 +75,8 @@ FlowEntity {
         id: flowTarget
         enabled: level.editMode
         visible: level.editMode
-        x: parent.width * 6
-        y: parent.height / 2 - height / 2
+        x: parent.flowTargetX * parent.level.width
+        y: parent.flowTargetY * parent.level.width
         color: "lightgreen"
         width: 20
         height: 20
@@ -105,9 +105,9 @@ FlowEntity {
                 emitter.emitRate = Math.abs(emitter.emitRate)
             } else {
                 if(wheel.angleDelta.y > 0) {
-                    emitDirection.magnitude += 10
+                    emitDirection.magnitude += 0.1
                 } else {
-                    emitDirection.magnitude -= 10
+                    emitDirection.magnitude -= 0.1
                 }
                 emitDirection.magnitude = Math.abs(emitDirection.magnitude)
             }

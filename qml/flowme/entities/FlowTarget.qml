@@ -6,7 +6,7 @@ import "../stringifier.js" as Stringifier
 FlowEntity {
     id: flowTargetRoot
 
-    property int strength: 2e8
+    property real strength: 2e8
 
     width: level.width * 0.05
     height: width
@@ -37,7 +37,7 @@ FlowEntity {
         pointY: height / 2
         system: parent.system
 
-        strength: flowTargetRoot.strength
+        strength: flowTargetRoot.strength * parent.level.width
 
         affectedParameter: Attractor.Acceleration
         proportionalToDistance: Attractor.InverseQuadratic

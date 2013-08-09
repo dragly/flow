@@ -6,6 +6,9 @@ import "../stringifier.js" as Stringifier
 
 Item {
     id: entityRoot
+    property real relX: 0
+    property real relY: 0
+
     property bool isEntity: true
     property ParticleSystem system: level.system
     property LevelBase level: parent
@@ -17,10 +20,13 @@ Item {
     }
 
     function stringifyDefaults() {
-        var properties = ["!x", "!y", "draggable"];
+        var properties = ["relX", "relY", "draggable"];
         var data = Stringifier.stringifyProperties(entityRoot, properties, false);
         return data;
     }
+
+    x: relX * level.width
+    y: relY * level.width
 
     width: level.width * 0.05
     height: width

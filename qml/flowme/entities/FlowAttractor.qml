@@ -6,7 +6,7 @@ import "../stringifier.js" as Stringifier
 FlowEntity {
     id: flowAttractorRoot
 
-    property int strength: 2e6
+    property real strength: 2e6
 
     width: level.width * 0.05
     height: width
@@ -27,7 +27,7 @@ FlowEntity {
         radius: width/2
         color: draggable ? "yellow" : "grey"
         Rectangle {
-            property real ratio: Math.abs(flowAttractorRoot.strength) / 1e7
+            property real ratio: Math.abs(flowAttractorRoot.strength) / 10
 //            visible: level.editMode
             anchors.centerIn: parent
             width: ratio * parent.width
@@ -46,7 +46,7 @@ FlowEntity {
         pointY: height / 2
         system: parent.system
 
-        strength: flowAttractorRoot.strength
+        strength: flowAttractorRoot.strength * flowAttractorRoot.level.width * flowAttractorRoot.level.width
 
         affectedParameter: Attractor.Acceleration
         proportionalToDistance: Attractor.InverseQuadratic
@@ -62,9 +62,9 @@ FlowEntity {
         enabled: level.editMode
         onWheel: {
             if(wheel.angleDelta.y > 0) {
-                flowAttractorRoot.strength += 1e6
+                flowAttractorRoot.strength += 1
             } else {
-                flowAttractorRoot.strength -= 1e6
+                flowAttractorRoot.strength -= 1
             }
         }
     }
