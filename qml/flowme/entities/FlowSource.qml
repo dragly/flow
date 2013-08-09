@@ -57,9 +57,9 @@ FlowEntity {
         lifeSpan: 12000
         lifeSpanVariation: 5000
         emitRate: 30
-        size: level.width * 0.02
+        size: level.width * 0.015
         sizeVariation: size / 10
-        endSize: level.width * 0.01
+        endSize: level.width * 0.005
         velocity: TargetDirection {
             id: emitDirection
             //            angleVariation: 180
