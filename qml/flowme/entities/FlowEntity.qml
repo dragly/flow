@@ -28,6 +28,14 @@ Item {
     x: relX * level.width
     y: relY * level.width
 
+    onXChanged: {
+        relX = x / level.width
+    }
+
+    onYChanged: {
+        relY = y / level.width
+    }
+
     width: level.width * 0.05
     height: width
 

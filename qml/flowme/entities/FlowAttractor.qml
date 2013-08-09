@@ -6,13 +6,13 @@ import "../stringifier.js" as Stringifier
 FlowEntity {
     id: flowAttractorRoot
 
-    property real strength: 2e6
+    property real strength: 2
 
     width: level.width * 0.05
     height: width
 
     function stringify() {
-        var properties = ["|strength"];
+        var properties = ["strength"];
         var data = "";
         data += "    FlowAttractor {\n";
         data += stringifyDefaults();
