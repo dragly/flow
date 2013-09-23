@@ -12,6 +12,7 @@ Item {
     property ParticleSystem system: particleSystem
     property int originalWidth: width
     property int originalHeight: height
+    property bool paused: false
 
     width: 100
     height: 62
@@ -44,6 +45,7 @@ Item {
     ParticleSystem {
         id: particleSystem
         anchors.fill: parent
+        paused: levelRoot.paused
     }
 
     ImageParticle {
@@ -107,6 +109,28 @@ Item {
         color: "white"
     }
 
+    Rectangle {
+        anchors {
+            top: parent.top
+            left: parent.left
+//            topMargin: parent.width * 0.025
+//            leftMargin: anchors.topMargin
+        }
+        color: "white"
+        width: parent.width * 0.05
+        height: width
+        Text {
+            anchors.centerIn: parent
+            text: "Pause"
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                levelRoot.paused = !levelRoot.paused
+            }
+        }
+    }
+
     Keys.onPressed: {
         if(event.key === Qt.Key_E) {
             if(editMode) {
@@ -120,4 +144,8 @@ Item {
             }
         }
     }
+
+//    LevelBackground {
+//        anchors.fill: parent
+//    }
 }
